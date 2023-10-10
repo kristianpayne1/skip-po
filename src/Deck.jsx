@@ -18,7 +18,7 @@ const Deck = ({ cards = ["12"], showTop = false }) => {
           key={idx}
           value={value}
           show={idx === cards.length - 1 && showTop}
-          style={{ bottom: `${0.15 * idx}rem`, right: `${0.1 * idx}rem` }}
+          style={{ bottom: `${0.15 * idx}em`, right: `${0.1 * idx}em` }}
         />
       ))}
     </StyledDeck>

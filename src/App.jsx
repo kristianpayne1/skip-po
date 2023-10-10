@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <Card value="12" show={show} />
+      <Card value="1" show={show} />
       <button onClick={() => setShow(!show)}>Flip</button>
       <Deck />
     </>

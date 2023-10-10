@@ -55,14 +55,18 @@ const StyledCard = styled.div`
     align-items: center;
     justify-content: center;
   }
+  p.logo {
+    transform: rotate(-15deg);
+    text-align: center;
+  }
+  p.center {
+  }
 `;
 
 const StyledFront = styled.div`
   height: 100%;
   div.color-bg {
-    background: linear-gradient(red, red) padding-box,
-      linear-gradient(135deg, rgba(255, 121, 121, 1), rgba(144, 0, 0, 1))
-        border-box;
+    background: ${(props) => props.backgroundColor};
   }
   p {
     color: white;
@@ -71,19 +75,36 @@ const StyledFront = styled.div`
     &.left,
     &.right {
       position: absolute;
+      &.logo {
+        font-size: 1em;
+        width: 3em;
+        line-height: 1em;
+      }
     }
     &.left {
       top: -0.35em;
       left: 0.15em;
+      &.logo {
+        top: -0.75em;
+      }
     }
     &.right {
       bottom: -0.35em;
       right: 0.15em;
       transform: rotate(180deg);
+      &.logo {
+        bottom: -0.75em;
+        transform: rotate(165deg);
+      }
     }
     &.center {
       font-size: 4em;
       text-shadow: 0 0 0 #000000, 0 0.1em 0.15em #000000;
+      &.logo {
+        margin-left: 0.5em;
+        font-size: 2.5em;
+        line-height: 1em;
+      }
     }
   }
 `;
@@ -120,12 +141,10 @@ const StyledBack = styled.div`
   p {
     &.center {
       position: absolute;
-      transform: rotate(-15deg);
       font-size: 2.5em;
-      text-align: center;
       line-height: 1em;
-      color: orange;
       margin-left: 0.5em;
+      color: orange;
       text-shadow: 0 0 0 #000000, 0 0.1em 0.15em #000000;
     }
   }
@@ -150,6 +169,18 @@ const StyledBack = styled.div`
   }
 `;
 
+const getBackgroundColor = (value, isSkipPo) => {
+  if (isSkipPo)
+    return "linear-gradient(orange, orange) padding-box, linear-gradient(135deg, rgba(255, 233, 138, 1), rgba(198, 103, 0, 1)) border-box";
+  else if (value < 5)
+    return "linear-gradient(#0018ff, #0018ff) padding-box, linear-gradient(135deg, rgba(138, 168, 255, 1), rgba(13, 33, 148, 1)) border-box";
+  else if (value >= 5 && value < 9)
+    return "linear-gradient(#00ae0d, #00ae0d) padding-box, linear-gradient(135deg, rgba(139, 255, 138, 1), rgba(0, 90, 7, 1)) border-box";
+  else if (value >= 9)
+    return "linear-gradient(red, red) padding-box, linear-gradient(135deg, rgba(255, 121, 121, 1), rgba(144, 0, 0, 1)) border-box";
+  else return;
+};
+
 const Card = ({ value = "12", show = false, ...attrs }) => {
   const cardRef = useRef();
 
@@ -159,17 +190,21 @@ const Card = ({ value = "12", show = false, ...attrs }) => {
     }
   }, [show]);
 
+  const isSkipPo = value === "*";
+  value = isSkipPo ? "Skip-Po" : value;
+  const backgroundColor = getBackgroundColor(value, isSkipPo);
+
   return (
     <StyledCard
       ref={cardRef}
       className={`card ${show ? "show" : "hide"}`}
       {...attrs}
     >
-      <StyledFront className="layout front">
+      <StyledFront className="layout front" backgroundColor={backgroundColor}>
         <div className="content color-bg">
-          <p className="center">{value}</p>
-          <p className="left">{value}</p>
-          <p className="right">{value}</p>
+          <p className={`center ${isSkipPo ? "logo" : ""}`}>{value}</p>
+          <p className={`left ${isSkipPo ? "logo" : ""}`}>{value}</p>
+          <p className={`right ${isSkipPo ? "logo" : ""}`}>{value}</p>
         </div>
       </StyledFront>
       <StyledBack className="layout back">
@@ -177,7 +212,7 @@ const Card = ({ value = "12", show = false, ...attrs }) => {
           <div className="overlay">
             <div className="white-bg" />
           </div>
-          <p className="center">Skip-Po</p>
+          <p className="center logo">Skip-Po</p>
         </div>
       </StyledBack>
     </StyledCard>
