@@ -4,15 +4,18 @@ import Card from "./Card";
 
 const StyledDeck = styled.div`
   position: relative;
-  height: 13em;
+  height: 12em;
+  width: 8em;
+  border: 0.1rem solid grey;
+  border-radius: 0.75em;
   div.card {
     position: absolute;
   }
 `;
 
-const Deck = ({ cards = ["12"], showTop = false }) => {
+const Deck = ({ cards = [], showTop = false }) => {
   return (
-    <StyledDeck>
+    <StyledDeck empty={!cards.length}>
       {cards.map((value, idx) => (
         <Card
           key={idx}
