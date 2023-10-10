@@ -30,7 +30,7 @@ const flipAnimation = css`
 
 const StyledCard = styled.div`
   ${flipAnimation}
-  font-size: ${props => props.large ? "2rem" : "1rem" };
+  font-size: ${(props) => (props.large ? "2rem" : "1rem")};
   background-color: white;
   border-radius: 0.75em;
   padding: 0.75em;
@@ -150,7 +150,7 @@ const StyledBack = styled.div`
   }
 `;
 
-const Card = ({ value = "12", show = false }) => {
+const Card = ({ value = "12", show = false, ...attrs }) => {
   const cardRef = useRef();
 
   useEffect(() => {
@@ -160,7 +160,11 @@ const Card = ({ value = "12", show = false }) => {
   }, [show]);
 
   return (
-    <StyledCard ref={cardRef} className={`${show ? "show" : "hide"}`}>
+    <StyledCard
+      ref={cardRef}
+      className={`card ${show ? "show" : "hide"}`}
+      {...attrs}
+    >
       <StyledFront className="layout front">
         <div className="content color-bg">
           <p className="center">{value}</p>

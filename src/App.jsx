@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Card from "./Card";
+import Deck from "./Deck";
 
 function App() {
   const [show, setShow] = useState(true);
@@ -8,6 +9,7 @@ function App() {
     <>
       <Card value="12" show={show} />
       <button onClick={() => setShow(!show)}>Flip</button>
+      <Deck />
     </>
   );
 }
