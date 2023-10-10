@@ -1,0 +1,15 @@
+import { useState } from "react";
+import Card from "./Card";
+
+function App() {
+  const [show, setShow] = useState(true);
+
+  return (
+    <>
+      <Card value="12" show={show} />
+      <button onClick={() => setShow(!show)}>Flip</button>
+    </>
+  );
+}
+
+export default App;
