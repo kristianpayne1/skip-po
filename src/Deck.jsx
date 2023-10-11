@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Card from "./Card";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 
 const StyledDeck = styled.div`
   position: relative;
@@ -8,23 +9,52 @@ const StyledDeck = styled.div`
   width: 8em;
   border: 0.1rem solid grey;
   border-radius: 0.75em;
-  div.card {
-    position: absolute;
-  }
 `;
 
-const Deck = ({ cards = [], showTop = false }) => {
+const getItemStyle = (isDragging, draggableStyle, idx) => ({
+  userSelect: "none",
+  bottom: `${0.15 * idx}em`,
+  right: `${0.1 * idx}em`,
+  position: isDragging ? "initial" : "absolute",
+  // styles we need to apply on draggables
+  ...draggableStyle,
+});
+
+const Deck = ({ cards = [], showTop = false, deckId = "droppable" }) => {
   return (
-    <StyledDeck empty={!cards.length}>
-      {cards.map((value, idx) => (
-        <Card
-          key={idx}
-          value={value}
-          show={idx === cards.length - 1 && showTop}
-          style={{ bottom: `${0.15 * idx}em`, right: `${0.1 * idx}em` }}
-        />
-      ))}
-    </StyledDeck>
+    <Droppable droppableId={deckId}>
+      {(provided) => (
+        <StyledDeck ref={provided.innerRef}>
+          {cards.map((value, idx) => (
+            <Draggable
+              key={`${value}-${idx}`}
+              draggableId={`${value}-${idx}`}
+              index={idx}
+              isDragDisabled={idx !== cards.length - 1}
+            >
+              {(provided, snapshot) => (
+                <div
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                  style={getItemStyle(
+                    snapshot.isDragging,
+                    provided.draggableProps.style,
+                    idx
+                  )}
+                  ref={provided.innerRef}
+                >
+                  <Card
+                    value={value}
+                    show={idx === cards.length - 1 && showTop}
+                  />
+                </div>
+              )}
+            </Draggable>
+          ))}
+          {provided.placeholder}
+        </StyledDeck>
+      )}
+    </Droppable>
   );
 };
 

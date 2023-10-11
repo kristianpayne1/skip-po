@@ -1,16 +1,12 @@
-import { useState } from "react";
-import Card from "./Card";
 import Deck from "./Deck";
+import { DragDropContext } from "react-beautiful-dnd";
 
 function App() {
-  const [show, setShow] = useState(true);
-
   return (
-    <>
-      <Card value="*" show={show} />
-      <button onClick={() => setShow(!show)}>Flip</button>
-      <Deck />
-    </>
+    <DragDropContext onDragEnd={console.log}>
+      <Deck cards={["12", "1", "2"]} deckId="droppable1" />
+      <Deck cards={[]} deckId="droppable2" />
+    </DragDropContext>
   );
 }
 

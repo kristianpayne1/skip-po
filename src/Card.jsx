@@ -124,7 +124,7 @@ const StyledBack = styled.div`
     }
     div.white-bg {
       position: absolute;
-      top: calc(50% - 2.75em);
+      top: calc(50% - 2.5em);
       width: 10em;
       height: 5em;
       transform: rotate(-15deg);
