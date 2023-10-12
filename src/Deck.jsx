@@ -11,14 +11,24 @@ const StyledDeck = styled.div`
   border-radius: 0.75em;
 `;
 
-const getItemStyle = (isDragging, draggableStyle, idx) => ({
-  userSelect: "none",
-  bottom: `${0.15 * idx}em`,
-  right: `${0.1 * idx}em`,
-  position: isDragging ? "initial" : "absolute",
-  // styles we need to apply on draggables
-  ...draggableStyle,
-});
+const getItemStyle = (snapshot, draggableStyle, idx) => {
+  const initialStyle = {
+    userSelect: "none",
+    bottom: `${0.15 * idx}em`,
+    right: `${0.1 * idx}em`,
+    position: "absolute",
+  };
+
+  if (!snapshot.isDragging) return initialStyle;
+  if (!snapshot.isDropAnimating) return draggableStyle;
+
+  return {
+    ...initialStyle,
+    position: "initial",
+    // styles we need to apply on draggables
+    ...draggableStyle,
+  };
+};
 
 const Deck = ({ cards = [], showTop = false, deckId = "droppable" }) => {
   return (
@@ -37,7 +47,7 @@ const Deck = ({ cards = [], showTop = false, deckId = "droppable" }) => {
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                   style={getItemStyle(
-                    snapshot.isDragging,
+                    snapshot,
                     provided.draggableProps.style,
                     idx
                   )}
@@ -61,6 +71,7 @@ const Deck = ({ cards = [], showTop = false, deckId = "droppable" }) => {
 Deck.propTypes = {
   cards: PropTypes.array,
   showTop: PropTypes.number,
+  deckId: PropTypes.string,
 };
 
 export default Deck;
