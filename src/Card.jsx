@@ -66,7 +66,7 @@ const StyledCard = styled.div`
 const StyledFront = styled.div`
   height: 100%;
   div.color-bg {
-    background: ${(props) => props.backgroundColor};
+    background: ${(props) => props.$backgroundColor};
   }
   p {
     color: white;
@@ -200,7 +200,7 @@ const Card = ({ value = "12", show = false, ...attrs }) => {
       className={`card ${show ? "show" : "hide"}`}
       {...attrs}
     >
-      <StyledFront className="layout front" backgroundColor={backgroundColor}>
+      <StyledFront className="layout front" $backgroundColor={backgroundColor}>
         <div className="content color-bg">
           <p className={`center ${isSkipPo ? "logo" : ""}`}>{value}</p>
           <p className={`left ${isSkipPo ? "logo" : ""}`}>{value}</p>
