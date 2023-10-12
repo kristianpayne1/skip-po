@@ -117,6 +117,7 @@ const StyledBack = styled.div`
       height: 100%;
       width: 108%;
       display: flex;
+      align-items: center;
       overflow: hidden;
       position: absolute;
       align-content: center;
@@ -124,7 +125,6 @@ const StyledBack = styled.div`
     }
     div.white-bg {
       position: absolute;
-      top: calc(50% - 2.5em);
       width: 10em;
       height: 5em;
       transform: rotate(-15deg);

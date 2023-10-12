@@ -7,8 +7,17 @@ const StyledDeck = styled.div`
   position: relative;
   height: 12em;
   width: 8em;
-  border: 0.1rem solid grey;
+  border: 0.1rem solid lightgray;
   border-radius: 0.75em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &::before {
+    content: "${(props) => props.placeholder}";
+    text-transform: uppercase;
+    color: lightgray;
+    position: absolute;
+  }
 `;
 
 const getItemStyle = (snapshot, draggableStyle, idx) => {
@@ -30,11 +39,24 @@ const getItemStyle = (snapshot, draggableStyle, idx) => {
   };
 };
 
-const Deck = ({ cards = [], showTop = false, deckId = "droppable" }) => {
+const getListStyle = (isDraggingOver) => ({
+  boxShadow: isDraggingOver ? "inset 0 0 20px lightgray, 0 0 20px lightgray" : "none",
+});
+
+const Deck = ({
+  cards = [],
+  showTop = false,
+  deckId = "droppable",
+  placeholder = "Deck",
+}) => {
   return (
     <Droppable droppableId={deckId}>
-      {(provided) => (
-        <StyledDeck ref={provided.innerRef}>
+      {(provided, snapshot) => (
+        <StyledDeck
+          ref={provided.innerRef}
+          placeholder={placeholder}
+          style={getListStyle(snapshot.isDraggingOver)}
+        >
           {cards.map((value, idx) => (
             <Draggable
               key={`${value}-${idx}`}
@@ -72,6 +94,7 @@ Deck.propTypes = {
   cards: PropTypes.array,
   showTop: PropTypes.number,
   deckId: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 export default Deck;
