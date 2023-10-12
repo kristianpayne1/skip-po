@@ -40,7 +40,7 @@ const getItemStyle = (snapshot, draggableStyle, idx) => {
 };
 
 const getListStyle = (isDraggingOver) => ({
-  boxShadow: isDraggingOver ? "inset 0 0 20px lightgray, 0 0 20px lightgray" : "none",
+  boxShadow: isDraggingOver ? "inset 0 0 10px lightgray, 0 0 20px lightgray" : "none",
 });
 
 const Deck = ({
