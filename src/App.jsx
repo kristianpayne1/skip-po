@@ -1,13 +1,19 @@
-import Deck from "./Deck";
-import { DragDropContext } from "react-beautiful-dnd";
+import Game from "./Game";
+
+const defaultGameRules = {
+  maxColorCards: 144,
+  maxSkipPoCards: 18,
+  maxBuildPiles: 4,
+  maxDiscardPilesPerPlayer: 4,
+  maxCardsPerHand: 5,
+  maxCardsPerStockPile: 30,
+  maxPlayers: 4,
+  allowBots: true,
+  allowOnline: true,
+};
 
 function App() {
-  return (
-    <DragDropContext onDragEnd={console.log}>
-      <Deck cards={["12", "1", "2"]} deckId="droppable1" />
-      <Deck cards={[]} deckId="droppable2" />
-    </DragDropContext>
-  );
+  return <Game gameRules={defaultGameRules} />;
 }
 
 export default App;

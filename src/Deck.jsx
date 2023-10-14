@@ -23,8 +23,8 @@ const StyledDeck = styled.div`
 const getItemStyle = (snapshot, draggableStyle, idx) => {
   const initialStyle = {
     userSelect: "none",
-    bottom: `${0.15 * idx}em`,
-    right: `${0.1 * idx}em`,
+    bottom: `${0.05 * idx}em`,
+    right: `${0.025 * idx}em`,
     position: "absolute",
   };
 
@@ -40,7 +40,7 @@ const getItemStyle = (snapshot, draggableStyle, idx) => {
 };
 
 const getListStyle = (isDraggingOver) => ({
-  boxShadow: isDraggingOver ? "inset 0 0 10px lightgray, 0 0 20px lightgray" : "none",
+  boxShadow: isDraggingOver ? "inset 0 0 1em lightgray, 0 0 2em lightgray" : "none",
 });
 
 const Deck = ({
@@ -92,7 +92,7 @@ const Deck = ({
 
 Deck.propTypes = {
   cards: PropTypes.array,
-  showTop: PropTypes.number,
+  showTop: PropTypes.bool,
   deckId: PropTypes.string,
   placeholder: PropTypes.string,
 };
