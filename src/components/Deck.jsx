@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import Card from "./Card";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+
+import Card from "./Card";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
 const StyledDeck = styled.div`
   position: relative;

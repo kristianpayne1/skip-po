@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { useMemo } from "react";
 import Deck from "./Deck";
+import styled from "styled-components";
+import { useSelector } from "react-redux";
+
+// import PropTypes from "prop-types";
 
 const StyledPlayerArea = styled.div`
   div.player-piles {
@@ -14,54 +15,30 @@ const StyledPlayerArea = styled.div`
   }
 `;
 
-const PlayerArea = ({
-  maxDiscardPilesPerPlayer,
-  maxCardsPerStockPile,
-}) => {
-  const DiscardPiles = useMemo(() => {
-    let discardPiles = [];
-    for (let i = 0; i < maxDiscardPilesPerPlayer; i++) {
-      discardPiles.push(
-        <Deck
-          key={`discard-${i}`}
-          deckId={`discard-${i}`}
-          showTop
-          placeholder="discard"
-        />
-      );
-    }
-    return discardPiles;
-  }, [maxDiscardPilesPerPlayer]);
-
-
-  // temporary
-  const stockPileCards = useMemo(() => {
-    let stockPile = [];
-    for (let i = 0; i < maxCardsPerStockPile; i++) {
-      const card = Math.round(Math.random() * 12) + 1;
-      stockPile.push(card === 13 ? "*" : `${card}`);
-    }
-    return stockPile;
-  }, [maxCardsPerStockPile]);
+const PlayerArea = ({}) => {
+  const stock = useSelector((s) => s.player.stock);
+  const discardPiles = useSelector((s) => s.player.discardPiles);
 
   return (
     <StyledPlayerArea>
       <div className="player-piles">
-        <div className="player-discard-piles">{DiscardPiles}</div>
-        <Deck
-          deckId="player-stock"
-          showTop
-          placeholder="stock"
-          cards={stockPileCards}
-        />
+        <div className="player-discard-piles">
+          {discardPiles.map((discardPile, index) => (
+            <Deck
+              key={`discard-${index}`}
+              showTop
+              placeholder="discard"
+              cards={discardPile}
+              deckId={`discard-${index}`}
+            />
+          ))}
+        </div>
+        <Deck deckId="player-stock" showTop placeholder="stock" cards={stock} />
       </div>
     </StyledPlayerArea>
   );
 };
 
-PlayerArea.propTypes = {
-  maxDiscardPilesPerPlayer: PropTypes.number,
-  maxCardsPerStockPile: PropTypes.number,
-};
+PlayerArea.propTypes = {};
 
 export default PlayerArea;
