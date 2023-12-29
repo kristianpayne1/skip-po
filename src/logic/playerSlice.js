@@ -35,6 +35,7 @@ export const playerSlice = createSlice({
       if (!Array.isArray(newCards)) return;
 
       state.hand.push(...newCards);
+      // ensure maximum allowed number of cards
       state.hand.slice(0, state.maxCardsPerHand);
     },
     removeCardFromHand: (state, action) => {
@@ -49,6 +50,7 @@ export const playerSlice = createSlice({
       if (!Array.isArray(newCards)) return;
 
       state.stock.push(...newCards);
+      // ensure maximum allowed number of cards
       state.stock.slice(0, state.maxCardsPerStockPile);
     },
     popStock: (state) => {

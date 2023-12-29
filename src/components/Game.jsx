@@ -38,7 +38,7 @@ const Game = ({ gameRules = {} }) => {
     // initialize game
     dispatch(initializeGame(gameRules));
     dispatch(initializePlayer(gameRules));
-  }, []);
+  }, [gameRules]);
 
   return (
     <DragDropContext onDragEnd={console.log}>

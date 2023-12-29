@@ -19,7 +19,7 @@ const StyledPlayerArea = styled.div`
   }
 `;
 
-const PlayerArea = ({}) => {
+const PlayerArea = () => {
   const stock = useSelector((s) => s.player.stock);
   const discardPiles = useSelector((s) => s.player.discardPiles);
 
