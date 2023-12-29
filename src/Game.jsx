@@ -17,6 +17,8 @@ const StyledPlayArea = styled.div`
   div.build-piles {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 `;
 

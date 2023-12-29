@@ -7,9 +7,13 @@ const StyledPlayerArea = styled.div`
   div.player-piles {
     display: flex;
     gap: 5rem;
+    flex-wrap: wrap;
+    justify-content: center;
     div.player-discard-piles {
       display: flex;
       gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 `;
