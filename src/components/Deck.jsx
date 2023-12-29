@@ -1,13 +1,14 @@
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import Card from "./Card";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+
+import Card from "./Card";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
 const StyledDeck = styled.div`
   position: relative;
   height: 12em;
   width: 8em;
-  border: 0.1rem solid lightgray;
+  border: 0.2rem solid lightgray;
   border-radius: 0.75em;
   display: flex;
   align-items: center;
@@ -40,7 +41,9 @@ const getItemStyle = (snapshot, draggableStyle, idx) => {
 };
 
 const getListStyle = (isDraggingOver) => ({
-  boxShadow: isDraggingOver ? "inset 0 0 1em lightgray, 0 0 2em lightgray" : "none",
+  boxShadow: isDraggingOver
+    ? "inset 0 0 1em lightgray, 0 0 2em lightgray"
+    : "none",
 });
 
 const Deck = ({

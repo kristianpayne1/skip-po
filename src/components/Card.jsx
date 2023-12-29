@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
+import { useEffect, useRef } from "react";
+
 import PropTypes from "prop-types";
 
 const flipAnimation = css`
